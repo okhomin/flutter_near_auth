@@ -18,6 +18,7 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   bool _isAuthenticated = false;
+  bool _inProgress = false;
   String _accountID = '';
   String _publicKey = '';
   String _token = '';
@@ -31,6 +32,7 @@ class _AppState extends State<App> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              if (_inProgress) const CircularProgressIndicator(),
               if (_isAuthenticated)
                 AccountInformation(
                     publicKey: _publicKey,
@@ -51,10 +53,16 @@ class _AppState extends State<App> {
                 }),
               if (!_isAuthenticated)
                 LoginButton(
+                  onPressed: () {
+                    setState(() {
+                      _inProgress = true;
+                    });
+                  },
                   onSuccess:
                       (String accountID, String publicKey, String token) {
                     setState(() {
                       _isAuthenticated = true;
+                      _inProgress = false;
                       _accountID = accountID;
                       _publicKey = publicKey;
                       _token = token;
@@ -109,8 +117,11 @@ class LoginButton extends StatelessWidget {
 
   final void Function(String accountID, String publicKey, String token)
       onSuccess;
+  final void Function() onPressed;
 
-  const LoginButton({Key? key, required this.onSuccess}) : super(key: key);
+  const LoginButton(
+      {Key? key, required this.onSuccess, required this.onPressed})
+      : super(key: key);
 
   Future<NEARData> _nearLogin() async {
     // generate ed25519 key pair
@@ -161,6 +172,7 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () async {
+        onPressed();
         final data = await _nearLogin();
         final token = await _backendLogin(data);
         onSuccess(data.accountID, data.publicKey, token.token);
