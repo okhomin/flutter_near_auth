@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NEAR</title>
+</head>
+<body>
+<script>
+  const walletUrl = 'https://wallet.testnet.near.org/'; // specify the wallet url
+  const contractId = 'auth.coatyworld1.testnet'; // specify the contract ID
+  const urlParams = new URLSearchParams(window.location.search); // get the url params
+  const publicKey = urlParams.get('public_key'); // get the public key
+  const successUrl = urlParams.get('success_url') || 'client://success'; // get the success url or set default
+  const failureUrl = urlParams.get('failure_url') || 'client://failure'; // get the failure url or set default
+
+  // redirect to the wallet
+  window.location.href = `${walletUrl}/login/?contract_id=${contractId}&success_url=${successUrl}&failure_url=${failureUrl}&public_key=${publicKey}`;
+</script>
+</body>
+</html>
