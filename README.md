@@ -126,6 +126,11 @@ go run main.go
 [`main.dart`](./client/lib/main.dart) contains the Flutter client logic that is responsible for the authentication process.
 To run the client you must have a connected device or emulator. But you may have to replace `localhost` with your local IP address in the [`main.dart`](./client/lib/main.dart#L112) file if you want to run the client on a real device.
 
+```sh
+cd client
+flutter run
+```
+
 ## License
 
 Distributed under the MIT License. See [`LICENSE`](./LICENSE) for more information.
