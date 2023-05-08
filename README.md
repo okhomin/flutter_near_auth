@@ -87,12 +87,12 @@ Follow these simple instructions to setup the required dependencies before usage
 
 ## Usage
 
-> Keep in mind you need to replace `walletUrl` and `contractId` with the `NEAR wallet` you want to use and with the `contract id` of your application in the [index.html](./backend/index.html#L9) file.
+> Keep in mind you need to replace `walletUrl` and `contractId` with the `NEAR wallet` you want to use and with the `contract id` of your application in the [index.html](./backend/index.html#L9-L10) file.
 ```javascript
 const walletUrl = 'https://wallet.testnet.near.org/';
 const contractId = 'auth.coatyworld1.testnet';
 ```
-> You need to replace `nearEndpoint` and `contractID` with the [`NEAR RPC provider`](https://docs.near.org/api/rpc/providers) you want to use and with the `contract id` of your application in the [main.go](./backend/main.go#L15) file.
+> You need to replace `nearEndpoint` and `contractID` with the [`NEAR RPC provider`](https://docs.near.org/api/rpc/providers) you want to use and with the `contract id` of your application in the [main.go](./backend/cmd/main.go#L15-L18) file.
 ```go
 package main
 
@@ -101,7 +101,7 @@ const (
 	contractID   = "auth.coatyworld1.testnet"
 )
 ```
-> You need to replace configuration constants in the Flutter client depending on your domain, path, and redirect urls in the [main.dart](./client/lib/main.dart#L112) file.
+> You need to replace configuration constants in the Flutter client depending on your domain, path, and redirect urls in the [main.dart](./client/lib/main.dart#L112-L116) file.
 ```dart
 static const String _backendHost = 'localhost:8080';
 static const String _failureURL = 'client://failure';
@@ -111,9 +111,9 @@ static const String _backendAuthPath = '/auth';
 ```
 
 ### Running Backend
-[`main.go`](./backend/main.go) contains the backend logic that is responsible for the validation process of the data received from the Flutter client.
+[`main.go`](./backend/cmd/main.go) contains the backend logic that is responsible for the validation process of the data received from the Flutter client.
 Also, it contains the logic of serving the [`HTML file`](./backend/index.html) that is used for redirection to the NEAR wallet.  
-The server will be available at `localhost:8080` by default. If you want to change the port, you need to change the [`main.go`](./backend/main.go#L108) file.
+The server will be available at `localhost:8080` by default. If you want to change the port, you need to change the [`main.go`](./backend/cmd/main.go#L108) file.
 
 ```sh
 cd backend
