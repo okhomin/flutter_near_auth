@@ -1,16 +1,23 @@
-# client
+<!-- USAGE EXAMPLES -->
 
-NEAR Authentication
+## Usage
 
-## Getting Started
+> You need to replace configuration constants in the Flutter client depending on your domain, path, and redirect urls in the [main.dart](./lib/main.dart#L112-L116) file.
+```dart
+static const String _backendHost = 'localhost:8080';
+static const String _failureURL = 'client://failure';
+static const String _successURL = 'client://success';
+static const String _nearLoginPath = '/near/index.html';
+static const String _backendAuthPath = '/auth';
+```
 
-This project is a starting point for a Flutter application.
+### Running Flutter client
+> Don't forget to generate platform related files and run the backend before running the Flutter client.
+> `flutter create --platforms=ios,android .`
 
-A few resources to get you started if this is your first Flutter project:
+[`main.dart`](./lib/main.dart) contains the Flutter client logic that is responsible for the authentication process.
+To run the client you must have a connected device or emulator. But you may have to replace `localhost` with your local IP address in the [`main.dart`](./lib/main.dart#L112) file if you want to run the client on a real device.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```sh
+flutter run
+```
