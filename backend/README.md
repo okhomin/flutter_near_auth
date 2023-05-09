@@ -20,4 +20,3 @@ The server will be available at `localhost:8080` by default. If you want to chan
 ```sh
 go run cmd/main.go
 ```
-
